@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>La Energía que Mueve el Mundo | Electricidad</title>
+
+  <meta name="description" content="Página educativa sobre la electricidad, su historia, conceptos fundamentales y circuitos eléctricos.">
+
+  <style>
+    :root {
+      --primary: #6d28d9;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      --dark: #0f172a;
+      --dark-2: #1e293b;
+      --light: #f8fafc;
+      --text: #334155;
+      --white: #ffffff;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       SCROLLBAR
+    ========================= */
+
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--primary), var(--secondary));
+      border-radius: 20px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 6%;
+      transition: 0.4s ease;
+    }
+
+    header.scrolled {
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(18px);
+      padding: 12px 6%;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    }
+
+    nav {
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      font-size: 1.3rem;
+      box-shadow: 0 5px 20px rgba(109,40,217,.35);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: .9rem;
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,.1);
+    }
+
+    .menu-btn {
+      display: none;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 120px 7% 80px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(6,182,212,.25), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(109,40,217,.35), transparent 35%),
+        linear-gradient(135deg, #020617, #111827 55%, #1e1b4b);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(255,255,255,.08);
+      top: 15%;
+      left: 7%;
+    }
+
+    .hero::after {
+      width: 450px;
+      height: 450px;
+      border: 1px solid rgba(255,255,255,.06);
+      right: -100px;
+      bottom: -120px;
+      animation-delay: 2s;
+    }
+
+    .hero-content {
+      max-width: 950px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 100px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      font-size: .85rem;
+      margin-bottom: 25px;
+      animation: fadeDown .8s ease forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+      animation: fadeUp .9s ease forwards;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #67e8f9, #a78bfa, #f0abfc);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      color: #cbd5e1;
+      font-size: 1.12rem;
+      animation: fadeUp 1.1s ease forwards;
+    }
+
+    .hero-buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      animation: fadeUp 1.3s ease forwards;
+    }
+
+    .btn {
+      padding: 13px 22px;
+      border-radius: 13px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: .3s;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      box-shadow: 0 10px 30px rgba(109,40,217,.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(109,40,217,.5);
+    }
+
+    .btn-outline {
+      color: white;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.05);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,.12);
+      transform: translateY(-4px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: .75rem;
+      color: #94a3b8;
+      animation: bounce 2s infinite;
+    }
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    section {
+      padding: 100px 7%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-heading {
+      max-width: 750px;
+      margin: 0 auto 55px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--primary);
+      background: #ede9fe;
+      padding: 6px 13px;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      color: var(--dark);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.1;
+      margin-bottom: 15px;
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+      color: #64748b;
+    }
+
+    /* =========================
+       PUNTO 1 - TIMELINE
+    ========================= */
+
+    #historia {
+      background: white;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px 45px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: .8s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 30px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border: 5px solid var(--primary);
+      border-radius: 50%;
+      z-index: 2;
+      box-shadow: 0 0 0 7px rgba(109,40,217,.1);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -9px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -9px;
+    }
+
+    .timeline-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 35px rgba(15,23,42,.06);
+      transition: .3s;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .year {
+      display: inline-block;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: .8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .timeline-card h3 {
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    /* =========================
+       PUNTO 2 - DATO CURIOSO
+    ========================= */
+
+    #curiosidad {
+      background:
+        radial-gradient(circle at 10% 20%, rgba(6,182,212,.1), transparent 30%),
+        #f8fafc;
+    }
+
+    .fact-box {
+      max-width: 900px;
+      margin: auto;
+      padding: 50px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #0f172a, #312e81);
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(15,23,42,.2);
+    }
+
+    .fact-box::before {
+      content: "⚡";
+      position: absolute;
+      font-size: 16rem;
+      right: -30px;
+      bottom: -80px;
+      opacity: .07;
+    }
+
+    .fact-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .fact-box h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .fact-box p {
+      color: #cbd5e1;
+      max-width: 700px;
+    }
+
+    .fact-highlight {
+      margin-top: 25px;
+      padding: 18px;
+      border-left: 4px solid #67e8f9;
+      background: rgba(255,255,255,.06);
+      border-radius: 0 12px 12px 0;
+      color: #e2e8f0;
+    }
+
+    /* =========================
+       PUNTO 3 - GLOSARIO
+    ========================= */
+
+    #glosario {
+      background: white;
+    }
+
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 17px 22px;
+      border: 1px solid #e2e8f0;
+      border-radius: 15px;
+      outline: none;
+      font-size: 1rem;
+      background: #f8fafc;
+      transition: .3s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(109,40,217,.1);
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .term-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: .35s;
+      cursor: default;
+      opacity: 0;
+      transform: translateY(25px);
+    }
+
+    .term-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .term-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(109,40,217,.25);
+      box-shadow: var(--shadow);
+    }
+
+    .term-letter {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #ede9fe;
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .term-card h3 {
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .term-card p {
+      font-size: .93rem;
+      color: #64748b;
+    }
+
+    /* =========================
+       PUNTO 4 - CUADRO
+    ========================= */
+
+    #comparativo {
+      background: #f8fafc;
+    }
+
+    .comparison-wrapper {
+      overflow-x: auto;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+      text-align: left;
+      font-size: .95rem;
+    }
+
+    th:first-child {
+      border-radius: 22px 0 0 0;
+    }
+
+    th:last-child {
+      border-radius: 0 22px 0 0;
+    }
+
+    td {
+      padding: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: .25s;
+    }
+
+    tbody tr:hover {
+      background: #f5f3ff;
+    }
+
+    .type {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #ecfeff;
+      color: #0891b2;
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    /* =========================
+       EXTRA INFO
+    ========================= */
+
+    .electricity-section {
+      background: #0f172a;
+      color: white;
+    }
+
+    .electricity-section .section-heading h2 {
+      color: white;
+    }
+
+    .electricity-section .section-heading p {
+      color: #94a3b8;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .concept-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 28px;
+      border-radius: 22px;
+      transition: .3s;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-7px);
+      background: rgba(255,255,255,.08);
+    }
+
+    .concept-card span {
+      font-size: 2rem;
+    }
+
+    .concept-card h3 {
+      margin: 15px 0 8px;
+    }
+
+    .concept-card p {
+      color: #94a3b8;
+      font-size: .92rem;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 40px 7%;
+      background: #020617;
+      color: #64748b;
+      text-align: center;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-25px);
+      }
+    }
+
+    @keyframes bounce {
+      0%,100% {
+        transform: translate(-50%, 0);
+      }
+      50% {
+        transform: translate(-50%, 10px);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .glossary-grid,
+      .concept-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px 5%;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 5%;
+        right: 5%;
+        display: none;
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 18px;
+        background: rgba(15,23,42,.97);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px;
+      }
+
+      section {
+        padding: 75px 5%;
+      }
+
+      .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .timeline::before {
+        left: 10px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding-left: 40px;
+        padding-right: 0;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 1px;
+        right: auto;
+      }
+
+      .glossary-grid,
+      .concept-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fact-box {
+        padding: 30px;
+      }
+
+      .fact-box h3 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <header id="header">
+    <nav>
+      <a href="#inicio" class="logo">
+        <span class="logo-icon">⚡</span>
+        ELECTRICIDAD
+      </a>
+
+      <div class="menu-btn" id="menuBtn">☰</div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#curiosidad">Dato curioso</a></li>
+        <li><a href="#glosario">Glosario</a></li>
+        <li><a href="#comparativo">Cuadro</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- =========================
+       INICIO
+  ========================== -->
+
+  <section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+      <span class="hero-tag">
+        GUÍA DE ESTUDIO · FÍSICA Y TECNOLOGÍA
+      </span>
+
+      <h1>
+        La energía que
+        <span class="gradient-text">mueve el mundo</span>
+      </h1>
+
+      <p>
+        Descubriendo la electricidad desde la física y la tecnología:
+        su historia, conceptos fundamentales y comportamiento en los
+        circuitos eléctricos.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#historia" class="btn btn-primary">
+          Explorar la guía →
+        </a>
+
+        <a href="#glosario" class="btn btn-outline">
+          Ver glosario
+        </a>
+      </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+      ↓ DESPLÁZATE PARA EXPLORAR
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PUNTO 1
+       RECORRIDO HISTÓRICO
+  ========================== -->
+
+  <section id="historia">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <span class="section-label">
+          Punto 01 · Recorrido histórico
+        </span>
+
+        <h2>
+          La historia de la electricidad
+        </h2>
+
+        <p>
+          Un recorrido por algunos de los principales acontecimientos
+          y personajes que contribuyeron al conocimiento de la electricidad.
+        </p>
+
+      </div>
+
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">Antigüedad</span>
+
+            <h3>Thales de Mileto</h3>
+
+            <p>
+              Observó que al frotar ámbar con ciertos materiales,
+              este podía atraer objetos ligeros. Este fenómeno se
+              relaciona con las primeras observaciones de la electricidad estática.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">1600</span>
+
+            <h3>William Gilbert</h3>
+
+            <p>
+              Estudió los fenómenos eléctricos y magnéticos de manera
+              sistemática y utilizó el término relacionado con la
+              electricidad a partir del ámbar.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">1752</span>
+
+            <h3>Benjamin Franklin</h3>
+
+            <p>
+              Realizó el famoso experimento de la cometa para estudiar
+              la naturaleza eléctrica de los rayos. Sus investigaciones
+              ayudaron a desarrollar conceptos de electricidad positiva
+              y negativa.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">1800</span>
+
+            <h3>Alessandro Volta</h3>
+
+            <p>
+              Construyó la pila voltaica, uno de los primeros dispositivos
+              capaces de producir una corriente eléctrica continua.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">1831</span>
+
+            <h3>Michael Faraday</h3>
+
+            <p>
+              Descubrió la inducción electromagnética, principio fundamental
+              para el funcionamiento de numerosos generadores eléctricos.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <span class="timeline-dot"></span>
+
+          <div class="timeline-card">
+
+            <span class="year">Siglo XIX</span>
+
+            <h3>La electricidad llega a la sociedad</h3>
+
+            <p>
+              Los avances científicos y tecnológicos permitieron desarrollar
+              generadores, sistemas de distribución, iluminación eléctrica
+              y numerosas aplicaciones prácticas.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PUNTO 2
+       DATO CURIOSO
+  ========================== -->
+
+  <section id="curiosidad">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <span class="section-label">
+          Punto 02 · Dato curioso
+        </span>
+
+        <h2>
+          Una chispa que cambió la historia
+        </h2>
+
+        <p>
+          Un dato relacionado con uno de los experimentos más conocidos
+          de la historia de la electricidad.
+        </p>
+
+      </div>
+
+
+      <div class="fact-box reveal">
+
+        <div class="fact-icon">⚡</div>
+
+        <h3>
+          ¿Sabías que Franklin estudió la electricidad de los rayos?
+        </h3>
+
+        <p>
+          En 1752, Benjamin Franklin realizó el famoso experimento
+          de la cometa durante una tormenta. Su objetivo era demostrar
+          que las nubes podían estar cargadas eléctricamente.
+        </p>
+
+        <div class="fact-highlight">
+          <strong>Dato importante:</strong>
+          el experimento se relacionó posteriormente con el desarrollo
+          del pararrayos, utilizado para proteger construcciones frente
+          a las descargas eléctricas.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PUNTO 3
+       GLOSARIO
+  ========================== -->
+
+  <section id="glosario">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <span class="section-label">
+          Punto 03 · Glosario
+        </span>
+
+        <h2>
+          Conceptos fundamentales
+        </h2>
+
+        <p>
+          Definiciones esenciales para comprender los temas de electricidad,
+          corriente y circuitos eléctricos estudiados en la guía.
+        </p>
+
+      </div>
+
+
+      <div class="search-box reveal">
+
+        <input
+          type="text"
+          id="searchGlossary"
+          placeholder="🔎 Buscar un concepto..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="glossary-grid" id="glossaryGrid">
+
+        <article class="term-card reveal">
+          <div class="term-letter">E</div>
+
+          <h3>Electricidad</h3>
+
+          <p>
+            Fenómeno relacionado con la presencia y movimiento de cargas
+            eléctricas. Se encuentra en numerosos fenómenos naturales
+            y aplicaciones tecnológicas.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">C</div>
+
+          <h3>Carga eléctrica</h3>
+
+          <p>
+            Propiedad física de la materia que puede ser positiva o negativa
+            y que participa en las interacciones eléctricas.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">C</div>
+
+          <h3>Corriente eléctrica</h3>
+
+          <p>
+            Flujo de cargas eléctricas que se desplazan a través de un
+            conductor dentro de un circuito eléctrico.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">C</div>
+
+          <h3>Corriente continua</h3>
+
+          <p>
+            Tipo de corriente en la que los electrones se mueven
+            predominantemente en una misma dirección. Una pila es un
+            ejemplo de fuente de corriente continua.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">A</div>
+
+          <h3>Corriente alterna</h3>
+
+          <p>
+            Corriente eléctrica en la que el movimiento de las cargas
+            cambia periódicamente de dirección. Es la utilizada
+            habitualmente en la red eléctrica doméstica.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">E</div>
+
+          <h3>Electricidad estática</h3>
+
+          <p>
+            Electricidad asociada con cargas eléctricas acumuladas
+            en la superficie de un objeto. Puede producirse mediante
+            el contacto o frotamiento de materiales.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">C</div>
+
+          <h3>Conductor eléctrico</h3>
+
+          <p>
+            Material que permite el desplazamiento de cargas eléctricas
+            con relativa facilidad. El cobre es uno de los conductores
+            más utilizados.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">A</div>
+
+          <h3>Átomo</h3>
+
+          <p>
+            Unidad fundamental de la materia. Está compuesto por un núcleo
+            con protones y neutrones, alrededor del cual se encuentran
+            los electrones.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">E</div>
+
+          <h3>Electrón</h3>
+
+          <p>
+            Partícula subatómica que posee carga eléctrica negativa y
+            que puede participar en el movimiento de cargas dentro
+            de los conductores.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">P</div>
+
+          <h3>Protón</h3>
+
+          <p>
+            Partícula subatómica ubicada en el núcleo del átomo y que
+            posee carga eléctrica positiva.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">N</div>
+
+          <h3>Neutrón</h3>
+
+          <p>
+            Partícula subatómica que se encuentra en el núcleo del átomo
+            y que no posee carga eléctrica.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">V</div>
+
+          <h3>Voltaje</h3>
+
+          <p>
+            Diferencia de potencial eléctrico que impulsa el movimiento
+            de cargas a través de un circuito.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">R</div>
+
+          <h3>Resistencia</h3>
+
+          <p>
+            Propiedad de un material o componente que se opone al paso
+            de la corriente eléctrica.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">C</div>
+
+          <h3>Circuito eléctrico</h3>
+
+          <p>
+            Conjunto de elementos conectados que permiten el recorrido
+            de una corriente eléctrica mediante un camino cerrado.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">P</div>
+
+          <h3>Polaridad</h3>
+
+          <p>
+            Identificación de los polos positivo y negativo de una fuente
+            o elemento eléctrico.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">F</div>
+
+          <h3>Frecuencia</h3>
+
+          <p>
+            Número de ciclos que realiza una señal periódica durante
+            un segundo. Es una característica importante de la corriente alterna.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">A</div>
+
+          <h3>Amplitud</h3>
+
+          <p>
+            Valor máximo que alcanza una señal oscilatoria respecto
+            a su posición de referencia.
+          </p>
+        </article>
+
+
+        <article class="term-card reveal">
+          <div class="term-letter">O</div>
+
+          <h3>Ohm</h3>
+
+          <p>
+            Unidad del Sistema Internacional utilizada para medir
+            la resistencia eléctrica.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PUNTO 4
+       CUADRO COMPARATIVO
+  ========================== -->
+
+  <section id="comparativo">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <span class="section-label">
+          Punto 04 · Cuadro comparativo
+        </span>
+
+        <h2>
+          Circuitos en serie, paralelo y mixto
+        </h2>
+
+        <p>
+          Comparación de las principales características, ventajas
+          y diferencias entre los tres tipos de circuitos eléctricos.
+        </p>
+
+      </div>
+
+
+      <div class="comparison-wrapper reveal">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Característica</th>
+              <th>Circuito en serie</th>
+              <th>Circuito en paralelo</th>
+              <th>Circuito mixto</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td>
+                <span class="type">Conexión</span>
+              </td>
+
+              <td>
+                Los componentes están conectados uno después de otro
+                formando un único camino para la corriente.
+              </td>
+
+              <td>
+                Los componentes están conectados en diferentes ramas,
+                formando varios caminos para la corriente.
+              </td>
+
+              <td>
+                Combina conexiones en serie y conexiones en paralelo
+                dentro del mismo circuito.
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                <span class="type">Corriente</span>
+              </td>
+
+              <td>
+                La corriente es la misma a través de los componentes
+                conectados en serie.
+              </td>
+
+              <td>
+                La corriente se distribuye entre las diferentes ramas.
+              </td>
+
+              <td>
+                La corriente depende de la sección del circuito
+                que se esté analizando.
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                <span class="type">Voltaje</span>
+              </td>
+
+              <td>
+                El voltaje de la fuente se distribuye entre los elementos.
+              </td>
+
+              <td>
+                Las ramas conectadas a la misma fuente tienen el mismo
+                voltaje entre sus extremos.
+              </td>
+
+              <td>
+                El comportamiento depende de cómo estén combinadas
+                las conexiones.
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                <span class="type">Falla</span>
+              </td>
+
+              <td>
+                Si un componente se interrumpe, puede abrirse todo
+                el circuito y dejar de circular corriente.
+              </td>
+
+              <td>
+                Una rama puede dejar de funcionar mientras las demás
+                continúan funcionando.
+              </td>
+
+              <td>
+                Una falla puede afectar una parte determinada del circuito
+                dependiendo de su configuración.
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                <span class="type">Ventaja</span>
+              </td>
+
+              <td>
+                Es sencillo de construir y analizar.
+              </td>
+
+              <td>
+                Permite que diferentes elementos funcionen de manera
+                independiente.
+              </td>
+
+              <td>
+                Permite aprovechar las características de las conexiones
+                en serie y paralelo.
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                <span class="type">Ejemplo</span>
+              </td>
+
+              <td>
+                <span class="badge">Guirnalda sencilla</span>
+              </td>
+
+              <td>
+                <span class="badge">Instalación doméstica</span>
+              </td>
+
+              <td>
+                <span class="badge">Sistemas electrónicos</span>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       INFORMACIÓN COMPLEMENTARIA
+  ========================== -->
+
+  <section class="electricity-section">
+
+    <div class="container">
+
+      <div class="section-heading reveal">
+
+        <span class="section-label">
+          Conceptos de la guía
+        </span>
+
+        <h2>
+          La electricidad y sus efectos
+        </h2>
+
+        <p>
+          La corriente eléctrica puede producir diferentes efectos
+          y tiene numerosas aplicaciones en la vida cotidiana.
+        </p>
+
+      </div>
+
+
+      <div class="concept-grid">
+
+        <div class="concept-card reveal">
+          <span>🔥</span>
+
+          <h3>Calor</h3>
+
+          <p>
+            El paso de corriente puede producir calor. Un ejemplo
+            es el funcionamiento de una plancha eléctrica.
+          </p>
+        </div>
+
+
+        <div class="concept-card reveal">
+          <span>🧪</span>
+
+          <h3>Efectos químicos</h3>
+
+          <p>
+            La corriente puede provocar transformaciones químicas,
+            como ocurre durante la electrólisis.
+          </p>
+        </div>
+
+
+        <div class="concept-card reveal">
+          <span>🧲</span>
+
+          <h3>Magnetismo</h3>
+
+          <p>
+            Una corriente eléctrica puede producir efectos magnéticos,
+            principio utilizado en dispositivos como los electroimanes.
+          </p>
+        </div>
+
+
+        <div class="concept-card reveal">
+          <span>💡</span>
+
+          <h3>Iluminación</h3>
+
+          <p>
+            La electricidad permite transformar energía eléctrica
+            en luz mediante diferentes dispositivos.
+          </p>
+        </div>
+
+
+        <div class="concept-card reveal">
+          <span>🔊</span>
+
+          <h3>Comunicación</h3>
+
+          <p>
+            La electricidad es fundamental para numerosos sistemas
+            modernos de comunicación y transmisión de información.
+          </p>
+        </div>
+
+
+        <div class="concept-card reveal">
+          <span>⚙️</span>
+
+          <h3>Movimiento</h3>
+
+          <p>
+            La energía eléctrica puede transformarse en energía mecánica
+            mediante motores y otros dispositivos.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <p>
+      <strong>La energía que mueve el mundo</strong>
+    </p>
+
+    <p>
+      Proyecto académico · Física y Tecnología
+    </p>
+
+    <p style="margin-top:10px; font-size:.8rem;">
+      Electricidad · Corriente · Circuitos · Tecnología
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* -------------------------
+       NAVBAR AL HACER SCROLL
+    ------------------------- */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* -------------------------
+       MENÚ MOBILE
+    ------------------------- */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+
+    });
+
+
+    /* -------------------------
+       ANIMACIONES DE SCROLL
+    ------------------------- */
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+    document.querySelectorAll(
+      ".reveal, .timeline-item, .term-card"
+    ).forEach(element => {
+
+      observer.observe(element);
+
+    });
+
+
+    /* -------------------------
+       BUSCADOR DEL GLOSARIO
+    ------------------------- */
+
+    const searchInput = document.getElementById("searchGlossary");
+
+    searchInput.addEventListener("input", () => {
+
+      const search = searchInput.value.toLowerCase().trim();
+
+      document.querySelectorAll(".term-card").forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+    });
+
+
+    /* -------------------------
+       EFECTO SUAVE PARA BOTONES
+    ------------------------- */
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+      anchor.addEventListener("click", function(e) {
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+
+          e.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
